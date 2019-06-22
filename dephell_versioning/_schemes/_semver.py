@@ -26,14 +26,14 @@ class SemVerScheme(BaseScheme):
     def bump_pre(self, version: Union[Version, str]) -> str:
         if isinstance(version, str):
             version = Version(version)
-        parts = version.release + (0, 0)
+        parts = self._get_parts(version)
         pre = version.pre[1] if version.pre else 0
         return '{}.{}.{}-rc.{}'.format(*parts[:3], pre + 1)
 
     def bump_local(self, version: Union[Version, str]) -> str:
         if isinstance(version, str):
             version = Version(version)
-        parts = version.release + (0, 0)
+        parts = self._get_parts(version)
         pre = '-{}.{}'.format(*version.pre) if version.pre else ''
         local = int(version.local) if version.local else 0
         return '{}.{}.{}{}+{}'.format(*parts[:3], pre, local + 1)
