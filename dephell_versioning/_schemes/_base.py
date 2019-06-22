@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from types import MappingProxyType
 from typing import Union, FrozenSet
 
 # external
@@ -8,7 +9,7 @@ from .._cached_property import cached_property
 
 
 class BaseScheme(ABC):
-    aliases = dict(
+    aliases = MappingProxyType(dict(
         breaking='major',
         feature='minor',
         fix='patch',
@@ -22,12 +23,12 @@ class BaseScheme(ABC):
         prefeature='preminor',
         prefix='prepatch',
         premicro='prepatch',
-    )
+    ))
 
     @cached_property
     def rules(self) -> FrozenSet[str]:
         rules = set()
-        for method in self.__dict__:
+        for method in dir(self):
             if method.startswith('bump_'):
                 rules.add(method[5:])
         return frozenset(rules)
