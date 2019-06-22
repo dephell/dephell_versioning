@@ -54,6 +54,12 @@ class BaseScheme(ABC):
     def bump_major(self, version: Union[Version, str]) -> str:
         pass
 
+    @staticmethod
+    def _get_parts(version: Union[Version, str]) -> str:
+        if isinstance(version, str):
+            version = Version(version)
+        return version.release + (0, 0)
+
     def __repr__(self) -> str:
         return '{name}({rules})'.format(
             name=type(self.__name__),
