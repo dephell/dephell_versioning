@@ -4,6 +4,7 @@ from ._base import BaseScheme
 
 
 class SemVerScheme(BaseScheme):
+    _rc = '-rc.'  # make it possible to chenge pre-release syntax for PEP
 
     def bump_init(self, version: Union[Version, str]) -> str:
         return '0.1.0'
@@ -28,7 +29,7 @@ class SemVerScheme(BaseScheme):
             version = Version(version)
         parts = self._get_parts(version)
         pre = version.pre[1] if version.pre else 0
-        return '{}.{}.{}-rc.{}'.format(*parts[:3], pre + 1)
+        return '{}.{}.{}{}{}'.format(*parts[:3], self._rc, pre + 1)
 
     def bump_local(self, version: Union[Version, str]) -> str:
         if isinstance(version, str):
@@ -39,13 +40,13 @@ class SemVerScheme(BaseScheme):
         return '{}.{}.{}{}+{}'.format(*parts[:3], pre, local + 1)
 
     def bump_premajor(self, version: Union[Version, str]) -> str:
-        return self.bump_major(version=version) + '-rc.1'
+        return self.bump_major(version=version) + self._rc + '1'
 
     def bump_preminor(self, version: Union[Version, str]) -> str:
-        return self.bump_minor(version=version) + '-rc.1'
+        return self.bump_minor(version=version) + self._rc + '1'
 
     def bump_prepatch(self, version: Union[Version, str]) -> str:
-        return self.bump_patch(version=version) + '-rc.1'
+        return self.bump_patch(version=version) + self._rc + '1'
 
     def bump_release(self, version: Union[Version, str]) -> str:
         parts = self._get_parts(version)
