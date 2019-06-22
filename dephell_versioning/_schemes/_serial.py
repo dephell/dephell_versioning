@@ -11,4 +11,4 @@ class SerialScheme(BaseScheme):
     def bump_major(self, version: Union[Version, str]) -> str:
         if isinstance(version, str):
             version = Version(version)
-        return str(version.release + 1)
+        return str(version.release[0] + 1)
