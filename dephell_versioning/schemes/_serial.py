@@ -1,9 +1,9 @@
 from typing import Union
 from packaging.version import Version
-from ._base import BaseRule
+from ._base import BaseScheme
 
 
-class SerialRule(BaseRule):
+class SerialScheme(BaseScheme):
 
     def bump_init(self, version: Union[Version, str]) -> str:
         return '1'

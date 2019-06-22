@@ -1,4 +1,4 @@
-from ._base import BaseRule
+from ._base import BaseScheme
 
 
 NUMBERS = [
@@ -18,7 +18,7 @@ NUMBERS = [
 ]
 
 
-class RomanRule(BaseRule):
+class RomanScheme(BaseScheme):
 
     # https://stackoverflow.com/a/28777781/8704691
     @staticmethod

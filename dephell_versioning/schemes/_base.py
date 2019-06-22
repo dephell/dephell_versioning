@@ -7,7 +7,7 @@ from packaging.version import Version
 from .._cached_property import cached_property
 
 
-class BaseRule(ABC):
+class BaseScheme(ABC):
     aliases = dict(
         breaking='major',
         feature='minor',
