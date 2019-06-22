@@ -33,6 +33,13 @@ class BaseRule(ABC):
         return frozenset(rules)
 
     def bump(self, version: Union[Version, str], rule: str) -> str:
+        # explicitly specified local version
+        if rule[0] == '+':
+            if not hasattr(self, 'bump_local'):
+                raise LookupError('unsupported rule: local')
+            version = str(version).split('+')[0]
+            return version + rule
+
         rule = self.aliases.get(rule, rule)
         method = getattr(self, 'bump_' + rule, None)
         if method is None:
@@ -41,4 +48,8 @@ class BaseRule(ABC):
 
     @abstractmethod
     def bump_init(self, version: Union[Version, str]) -> str:
+        pass
+
+    @abstractmethod
+    def bump_major(self, version: Union[Version, str]) -> str:
         pass
