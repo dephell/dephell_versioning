@@ -2,6 +2,7 @@ from types import MappingProxyType
 
 from ._base import BaseRule
 from ._roman import RomanRule
+from ._serial import SerialRule
 
 
 __all__ = [
@@ -9,9 +10,11 @@ __all__ = [
 
     'BaseRule',
     'RomanRule',
+    'SerialRule',
 ]
 
 
 RULES = MappingProxyType(dict(
-    roman=RomanRule,
+    roman=RomanRule(),
+    serial=SerialRule(),
 ))
