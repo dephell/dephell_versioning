@@ -4,6 +4,9 @@ from ._base import BaseScheme
 
 
 class ComVerScheme(BaseScheme):
+    """
+    https://github.com/staltz/comver
+    """
 
     def bump_init(self, version: Union[Version, str]) -> str:
         return '0.1'

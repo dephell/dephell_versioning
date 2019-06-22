@@ -5,6 +5,9 @@ from ._base import BaseScheme
 
 
 class CalVerScheme(BaseScheme):
+    """
+    https://calver.org/
+    """
 
     # make it possible to reload date from child classes
     @property

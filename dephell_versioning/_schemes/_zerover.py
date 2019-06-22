@@ -4,6 +4,9 @@ from ._semver import SemVerScheme
 
 
 class ZeroVerScheme(SemVerScheme):
+    """
+    https://0ver.org/
+    """
 
     @staticmethod
     def _get_parts(version: Union[Version, str]) -> str:

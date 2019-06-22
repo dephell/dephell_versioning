@@ -4,6 +4,10 @@ from ._semver import SemVerScheme
 
 
 class PEPScheme(SemVerScheme):
+    """
+    https://www.python.org/dev/peps/pep-0440/#version-scheme
+    """
+
     _rc = 'rc'  # PEP has different pre-release syntax
 
     def bump_local(self, version: Union[Version, str]) -> str:

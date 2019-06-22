@@ -19,6 +19,9 @@ NUMBERS = [
 
 
 class RomanScheme(BaseScheme):
+    """
+    Mac OS X reference
+    """
 
     # https://stackoverflow.com/a/28777781/8704691
     @staticmethod

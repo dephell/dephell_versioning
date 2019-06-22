@@ -4,6 +4,9 @@ from ._base import BaseScheme
 
 
 class SerialScheme(BaseScheme):
+    """
+    https://packaging.python.org/guides/distributing-packages-using-setuptools/#serial-versioning
+    """
 
     def bump_init(self, version: Union[Version, str]) -> str:
         return '1'

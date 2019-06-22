@@ -4,6 +4,10 @@ from ._base import BaseScheme
 
 
 class SemVerScheme(BaseScheme):
+    """
+    https://semver.org/
+    """
+
     _rc = '-rc.'  # make it possible to chenge pre-release syntax for PEP
 
     def bump_init(self, version: Union[Version, str]) -> str:
