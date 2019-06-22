@@ -53,3 +53,9 @@ class BaseScheme(ABC):
     @abstractmethod
     def bump_major(self, version: Union[Version, str]) -> str:
         pass
+
+    def __repr__(self) -> str:
+        return '{name}({rules})'.format(
+            name=type(self.__name__),
+            rules=', '.join(self.rules),
+        )
