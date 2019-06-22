@@ -1,6 +1,6 @@
 from typing import Union
 from packaging.version import Version
-from .schemes import SCHEMES
+from ._schemes import SCHEMES
 
 
 def bump_version(version: Union[Version, str], rule: str, scheme: str = 'semver') -> str:
