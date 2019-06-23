@@ -1,6 +1,14 @@
+import re
+from pathlib import Path
 from typing import FrozenSet, Union
-from packaging.version import Version
+
+from packaging.version import Version, VERSION_PATTERN
+
 from ._schemes import BaseScheme, SCHEMES
+
+
+REX_VERSION = re.compile(VERSION_PATTERN, re.VERBOSE | re.IGNORECASE)
+PREFIXES = {'__version__', 'VERSION', 'version'}
 
 
 def get_schemes() -> FrozenSet[str]:
@@ -23,3 +31,37 @@ def bump_version(version: Union[Version, str], rule: str, scheme: str = 'semver'
     if scheme_manager is None:
         raise LookupError('invalid scheme: {}'.format(scheme))
     return scheme_manager.bump(version=version, rule=rule)
+
+
+def bump_file(path: Path, old: str, new: str) -> bool:
+    file_bumped = False
+    new_content = []
+    with path.open('r') as stream:
+        for line in stream:
+            prefix, sep, _version = line.partition('=')
+            if not sep:
+                new_content.append(line)
+                continue
+            if prefix.rstrip() not in PREFIXES:
+                new_content.append(line)
+                continue
+
+            # replace old version
+            if old:
+                new_line = line.replace(old, new, 1)
+                if new_line != line:
+                    new_content.append(new_line)
+                    file_bumped = True
+                    continue
+
+            # replace any version
+            new_line, count = REX_VERSION.subn(new, line)
+            if count == 1:
+                new_content.append(new_line)
+                file_bumped = True
+                continue
+
+            new_content.append(line)
+    if file_bumped:
+        path.write_text(''.join(new_content))
+    return file_bumped
