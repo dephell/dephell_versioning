@@ -1,5 +1,9 @@
 ## dephell_versioning
 
+[![travis](https://travis-ci.org/dephell/dephell_versioning.svg?branch=master)](https://travis-ci.org/dephell/dephell_versioning)
+[![appveyor](https://ci.appveyor.com/api/projects/status/github/dephell/dephell_versioning?svg=true)](https://ci.appveyor.com/project/orsinium/dephell-versioning)
+[![MIT License](https://img.shields.io/pypi/l/dephell-versioning.svg)](https://github.com/dephell/dephell_versioning/blob/master/LICENSE)
+
 Library for bumping project version.
 
 Available schemes:
@@ -32,6 +36,14 @@ Available rules (and aliases):
   + `release`
 
 Read more about schemes and rules in the documentation for [dephell project bump](https://dephell.readthedocs.io/en/latest/cmd-project-bump.html).
+
+## Installation
+
+install from [PyPI](https://pypi.org/project/dephell-versioning/):
+
+```bash
+python3 -m pip install --user dephell_versioning
+```
 
 ## Usage
 
@@ -94,6 +106,6 @@ root = Root(path=Path(), name='dephell_discover')
 
 # root.metainfo can be None if project isn't found in the given directory
 if root.metainfo:
-  print(root.metainfo.version)
+    print(root.metainfo.version)
 # '0.1.2'
 ```
