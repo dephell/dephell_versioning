@@ -1,4 +1,4 @@
-from ._api import bump_version, get_aliases, get_rules, get_schemes
+from ._core import bump_version, get_aliases, get_rules, get_schemes
 from ._schemes import BaseScheme, SCHEMES
 
 
