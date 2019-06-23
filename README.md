@@ -69,3 +69,31 @@ bump_version(version='1.2.3', rule='+456', scheme='semver')
 bump_version(version='', rule='init', scheme='semver')
 # '0.1.0'
 ```
+
+Bump version in a python file:
+
+```python
+from dephell_versioning import bump_file
+from pathlib import Path
+
+# returns `True` if version was bumped
+bump_file(path=Path('dephell_versioning', '__init__.py'), old='0.1.0', new='0.1.1')
+# True
+
+# old version is optional: any version will be bumped if old isn't found
+bump_file(path=Path('dephell_versioning', '__init__.py'), old='', new='0.1.2')
+# True
+```
+
+Use [dephell_discover](https://github.com/dephell/dephell_discover) to find out the current version in a python project:
+
+```python
+from dephell_discover import Root
+from pathlib import Path
+root = Root(path=Path(), name='dephell_discover')
+
+# root.metainfo can be None if project isn't found in the given directory
+if root.metainfo:
+  print(root.metainfo.version)
+# '0.1.2'
+```
