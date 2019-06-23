@@ -1,0 +1,32 @@
+language: python
+
+before_install:
+  # show a little bit more information about environment
+  - sudo apt-get install -y tree
+  - env
+  - tree
+  # install DepHell
+  # https://github.com/travis-ci/travis-ci/issues/8589
+  - curl https://raw.githubusercontent.com/dephell/dephell/master/install.py | /opt/python/3.6/bin/python
+  - dephell inspect self
+install:
+  - dephell venv create --env=$ENV --python="/opt/python/$TRAVIS_PYTHON_VERSION/bin/python"
+  - dephell deps install --env=$ENV
+script:
+  - dephell venv run --env=$ENV
+
+matrix:
+  include:
+    - python: "3.5"
+      env: ENV=pytest
+    - python: "3.6"
+      env: ENV=pytest
+    - python: "3.7-dev"
+      env: ENV=pytest
+    - python: "pypy3.5"
+      env: ENV=pytest
+
+    - python: "3.6"
+      env: ENV=flake8
+    - python: "3.6"
+      env: ENV=typing
