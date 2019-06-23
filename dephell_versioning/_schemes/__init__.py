@@ -34,5 +34,5 @@ SCHEMES = MappingProxyType(dict(
     romver=RomVerScheme(),
     semver=SemVerScheme(),
     serial=SerialScheme(),
-    serover=ZeroVerScheme(),
+    zerover=ZeroVerScheme(),
 ))
