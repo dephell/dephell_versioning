@@ -59,6 +59,15 @@ get_rules()
 
 get_aliases()
 # frozenset({'alpha', 'rc', ..., 'micro', 'breaking'})
+
+# get rules for some scheme:
+get_rules(scheme='calver')
+# frozenset({'major', 'patch', 'init'})
+
+# get aliases for specific rules:
+get_aliases(rules={'major', 'minor'})
+# frozenset({'feature', 'breaking'})
+
 ```
 
 Bump version:

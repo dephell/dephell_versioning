@@ -26,9 +26,14 @@ def get_rules(scheme: str = None) -> FrozenSet[str]:
 
 
 def get_aliases(rules: Iterable[str] = None) -> FrozenSet[str]:
-    if rules:
-        frozenset(alias for alias, rule in BaseScheme.aliases.items() if rule in rules)
-    return frozenset(BaseScheme.aliases)
+    if rules is None:
+        return frozenset(BaseScheme.aliases)
+
+    result = set()  # type: Set[str]
+    for alias, rule in BaseScheme.aliases.items():
+        if rule in rules:
+            result.add(alias)
+    return frozenset(result)
 
 
 def bump_version(version: Union[Version, str], rule: str, scheme: str = 'semver') -> str:
