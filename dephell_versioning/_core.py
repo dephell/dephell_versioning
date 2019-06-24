@@ -1,6 +1,6 @@
 import re
 from pathlib import Path
-from typing import FrozenSet, Union, Set
+from typing import FrozenSet, Union, Set, Iterable
 
 from packaging.version import Version, VERSION_PATTERN
 
@@ -15,14 +15,19 @@ def get_schemes() -> FrozenSet[str]:
     return frozenset(SCHEMES)
 
 
-def get_rules() -> FrozenSet[str]:
+def get_rules(scheme: str = None) -> FrozenSet[str]:
+    if scheme is not None:
+        return SCHEMES[scheme].rules
+
     rules = set()  # type: Set[str]
     for scheme in SCHEMES.values():
         rules.update(scheme.rules)
     return frozenset(rules)
 
 
-def get_aliases() -> FrozenSet[str]:
+def get_aliases(rules: Iterable[str] = None) -> FrozenSet[str]:
+    if rules:
+        frozenset(alias for alias, rule in BaseScheme.aliases.items() if rule in rules)
     return frozenset(BaseScheme.aliases)
 
 
