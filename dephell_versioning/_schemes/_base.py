@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from types import MappingProxyType
-from typing import Union, FrozenSet
+from typing import Union, FrozenSet, Tuple
 
 # external
 from packaging.version import Version
@@ -56,13 +56,13 @@ class BaseScheme(ABC):
         pass
 
     @staticmethod
-    def _get_parts(version: Union[Version, str]) -> str:
+    def _get_parts(version: Union[Version, str]) -> Tuple[int, ...]:
         if isinstance(version, str):
             version = Version(version)
         return version.release + (0, 0)
 
     def __repr__(self) -> str:
         return '{name}({rules})'.format(
-            name=type(self.__name__),
+            name=type(self).__name__,
             rules=', '.join(self.rules),
         )

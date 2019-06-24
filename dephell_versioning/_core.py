@@ -1,6 +1,6 @@
 import re
 from pathlib import Path
-from typing import FrozenSet, Union
+from typing import FrozenSet, Union, Set
 
 from packaging.version import Version, VERSION_PATTERN
 
@@ -16,7 +16,7 @@ def get_schemes() -> FrozenSet[str]:
 
 
 def get_rules() -> FrozenSet[str]:
-    rules = set()
+    rules = set()  # type: Set[str]
     for scheme in SCHEMES.values():
         rules.update(scheme.rules)
     return frozenset(rules)
