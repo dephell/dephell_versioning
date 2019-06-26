@@ -1,0 +1,17 @@
+.pytest_cache/
+__pycache__/
+*.pyc
+
+*.egg-info/
+dist/
+build/
+pip-wheel-metadata/
+
+.tox
+.mypy_cache
+
+.dephell_cache/
+.dephell_report/
+
+README.rst
+setup.py

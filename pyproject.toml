@@ -1,0 +1,56 @@
+[tool.dephell.main]
+from = {format = "poetry", path = "pyproject.toml"}
+to = {format = "setuppy", path = "setup.py"}
+
+[tool.dephell.flake8]
+from = {format = "pip", path = "requirements-flake.txt"}
+python = ">=3.6"
+command = "flake8"
+
+[tool.dephell.pytest]
+from = {format = "poetry", path = "pyproject.toml"}
+tests = ["tests", "README.md"]
+command = "pytest tests/"
+
+[tool.dephell.typing]
+from = {format = "poetry", path = "pyproject.toml"}
+command = "mypy --ignore-missing-imports --allow-redefinition dephell_versioning"
+
+
+[tool.isort]
+line_length = 120
+combine_as_imports = true
+balanced_wrapping = true
+lines_after_imports = 2
+not_skip = "__init__.py"
+multi_line_output = 5
+
+import_heading_stdlib = "built-in"
+import_heading_thirdparty = "external"
+import_heading_firstparty = "project"
+import_heading_localfolder = "app"
+
+
+[tool.poetry]
+name = "dephell_versioning"
+version = "0.1.0"
+description = "Library for bumping project version like a pro"
+authors = ["Gram <master_fess@mail.ru>"]
+readme = "README.md"
+license = "MIT"
+repository = "https://github.com/dephell/dephell_versioning"
+keywords = ["dephell", "packaging", "version", "versions", "versioning", "bump", "bumping"]
+# https://pypi.org/classifiers/
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Framework :: Setuptools Plugin",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[tool.poetry.dependencies]
+python = ">=3.5"
+packaging = "*"
