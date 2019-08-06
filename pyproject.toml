@@ -33,7 +33,7 @@ import_heading_localfolder = "app"
 
 [tool.poetry]
 name = "dephell_versioning"
-version = "0.1.0"
+version = "0.1.1"
 description = "Library for bumping project version like a pro"
 authors = ["Gram <master_fess@mail.ru>"]
 readme = "README.md"
