@@ -8,7 +8,46 @@ class PEPScheme(SemVerScheme):
     https://www.python.org/dev/peps/pep-0440/#version-scheme
     """
 
+    _alpha = 'alpha'
+    _beta = 'beta'
     _rc = 'rc'  # PEP has different pre-release syntax
+
+    pre_mapping=dict(
+        a=_alpha,
+        b=_beta,
+        rc=_rc
+    )
+    def bump_pre(self, version: Union[Version, str]) -> str:
+        if isinstance(version, str):
+            version = Version(version)
+        parts = self._get_parts(version)
+        if version.pre:
+            pre = version.pre[1]
+            return '{}.{}.{}{}{}'.format(*parts[:3],self.pre_mapping[version.pre[0]], pre+1)
+        else:
+            return '{}.{}.{}{}{}'.format(*parts[:3], self._alpha, 1)
+
+    def bump_alpha(self, version: Union[Version, str]) -> str:
+        if isinstance(version, str):
+            version = Version(version)
+        parts = self._get_parts(version)
+        alpha = version.pre[1] if (version.pre and version.pre[0] == 'a') else 0
+        return '{}.{}.{}{}{}'.format(*parts[:3], self._alpha, alpha+1)
+
+    def bump_beta(self, version: Union[Version, str]) -> str:
+        if isinstance(version, str):
+            version = Version(version)
+        parts = self._get_parts(version)
+        beta = version.pre[1] if (version.pre and version.pre[0] == 'b') else 0
+        return '{}.{}.{}{}{}'.format(*parts[:3], self._beta, beta+1)
+
+    def bump_rc(self, version: Union[Version, str]) -> str:
+        if isinstance(version, str):
+            version = Version(version)
+        parts = self._get_parts(version)
+        rc = version.pre[1] if (version.pre and version.pre[0] == 'rc') else 0
+        return '{}.{}.{}{}{}'.format(*parts[:3], self._rc, rc+1)
+
 
     def bump_local(self, version: Union[Version, str]) -> str:
         if isinstance(version, str):

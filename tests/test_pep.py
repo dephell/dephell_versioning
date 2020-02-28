@@ -12,12 +12,30 @@ from dephell_versioning import bump_version
     ('patch',    '1.2.3', '1.2.4'),
 
     # pre-base version
-    ('premajor', '1.2.3', '2.0.0rc1'),
-    ('preminor', '1.2.3', '1.3.0rc1'),
-    ('prepatch', '1.2.3', '1.2.4rc1'),
+    ('premajor', '1.2.3', '2.0.0alpha1'),
+    ('preminor', '1.2.3', '1.3.0alpha1'),
+    ('prepatch', '1.2.3', '1.2.4alpha1'),
+
+    # add pep specific parts
+    ('pre',      '1.2.3', '1.2.3alpha1'), # pre will now append the first value in ('alpha', 'beta', 'rc')
+    ('alpha',    '1.2.3', '1.2.3alpha1'),
+    ('beta',     '1.2.3', '1.2.3beta1'),
+    ('rc',       '1.2.3', '1.2.3rc1'),
+
+    # update alpha -> beta -> rc
+    ('beta',     '1.2.3alpha1', '1.2.3beta1'),
+    ('rc',       '1.2.3beta1',  '1.2.3rc1'),
+
+    # bump alpha, beta, rc
+    ('alpha',    '1.2.3alpha1', '1.2.3alpha2'),
+    ('pre',      '1.2.3alpha1', '1.2.3alpha2'),
+    ('beta',     '1.2.3beta1',  '1.2.3beta2'),
+    ('pre',      '1.2.3beta1',  '1.2.3beta2'),
+    ('rc',       '1.2.3rc1',    '1.2.3rc2'),
+    ('pre',      '1.2.3rc1',    '1.2.3rc2'),
 
     # add special part
-    ('pre',      '1.2.3', '1.2.3rc1'),
+    #('pre',      '1.2.3', '1.2.3rc1'), # disabled because of changes in bump_pre implementation
     ('post',     '1.2.3', '1.2.3.post1'),
     ('dev',      '1.2.3', '1.2.3.dev1'),
     ('local',    '1.2.3', '1.2.3+1'),
@@ -36,4 +54,4 @@ from dephell_versioning import bump_version
 
 ])
 def test_bump_version(rule, old, new):
-    assert bump_version(rule=rule, version=old, scheme='pep') == new
+    assert bump_version(rule=rule, version=old, scheme='pep') == new, "Rule {} failed for '{}'!".format(rule, old)
