@@ -36,7 +36,8 @@ class PEPScheme(SemVerScheme):
         if isinstance(version, str):
             version = Version(version)
         parts = self._get_parts(version)
-        return '{}.{}.{}.post{}'.format(*parts[:3], (version.post or 0) + 1)
+        post = (version.post or 0) + 1  # type: ignore
+        return '{}.{}.{}.post{}'.format(*parts[:3], post)
 
     def bump_dev(self, version: Union[Version, str]) -> str:
         if isinstance(version, str):
@@ -47,7 +48,8 @@ class PEPScheme(SemVerScheme):
             suffix += 'rc{}'.format(version.pre[1])
         elif version.post:
             suffix += '.post{}'.format(version.post)
-        suffix += '.dev{}'.format((version.dev or 0) + 1)
+        dev = (version.dev or 0) + 1  # type: ignore
+        suffix += '.dev{}'.format(dev)
 
         parts = self._get_parts(version)
         return '{}.{}.{}{}'.format(*parts[:3], suffix)
