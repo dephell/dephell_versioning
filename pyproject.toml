@@ -35,7 +35,7 @@ import_heading_localfolder = "app"
 name = "dephell_versioning"
 version = "0.1.1"
 description = "Library for bumping project version like a pro"
-authors = ["Gram <master_fess@mail.ru>"]
+authors = ["Gram <mail@orsinium.dev>"]
 readme = "README.md"
 license = "MIT"
 repository = "https://github.com/dephell/dephell_versioning"
@@ -52,5 +52,5 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.5"
+python = ">=3.6"
 packaging = "*"
