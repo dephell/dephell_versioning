@@ -8,14 +8,12 @@ class PEPScheme(SemVerScheme):
     https://www.python.org/dev/peps/pep-0440/#version-scheme
     """
 
-    _alpha = 'a'
-    _beta = 'b'
     _rc = 'rc'  # PEP has different pre-release syntax
 
     pre_mapping = dict(
-        a=_alpha,
-        b=_beta,
-        rc=_rc
+        a='a',
+        b='b',
+        rc='rc',
     )
 
     def bump_pre(self, version: Union[Version, str]) -> str:
@@ -33,14 +31,14 @@ class PEPScheme(SemVerScheme):
             version = Version(version)
         parts = self._get_parts(version)
         alpha = version.pre[1] if (version.pre and version.pre[0] == 'a') else 0
-        return '{}.{}.{}{}{}'.format(*parts[:3], self._alpha, alpha + 1)
+        return '{}.{}.{}a{}'.format(*parts[:3], alpha + 1)
 
     def bump_beta(self, version: Union[Version, str]) -> str:
         if isinstance(version, str):
             version = Version(version)
         parts = self._get_parts(version)
         beta = version.pre[1] if (version.pre and version.pre[0] == 'b') else 0
-        return '{}.{}.{}{}{}'.format(*parts[:3], self._beta, beta + 1)
+        return '{}.{}.{}b{}'.format(*parts[:3], beta + 1)
 
     def bump_rc(self, version: Union[Version, str]) -> str:
         if isinstance(version, str):

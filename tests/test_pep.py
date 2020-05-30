@@ -54,5 +54,4 @@ from dephell_versioning import bump_version
 
 ])
 def test_bump_version(rule, old, new):
-    assert bump_version(rule=rule, version=old, scheme='pep') == new,\
-        "Rule {} failed for '{}'!".format(rule, old)
+    assert bump_version(rule=rule, version=old, scheme='pep') == new
