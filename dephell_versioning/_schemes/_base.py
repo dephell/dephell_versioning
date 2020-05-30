@@ -15,10 +15,6 @@ class BaseScheme(ABC):
         fix='patch',
         micro='patch',
 
-        rc='pre',
-        alpha='pre',
-        beta='pre',
-
         prebreaking='premajor',
         prefeature='preminor',
         prefix='prepatch',

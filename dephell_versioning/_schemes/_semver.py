@@ -44,13 +44,16 @@ class SemVerScheme(BaseScheme):
         return '{}.{}.{}{}+{}'.format(*parts[:3], pre, local + 1)
 
     def bump_premajor(self, version: Union[Version, str]) -> str:
-        return self.bump_major(version=version) + self._rc + '1'
+        new_version = self.bump_major(version=version)
+        return self.bump_pre(version=new_version)
 
     def bump_preminor(self, version: Union[Version, str]) -> str:
-        return self.bump_minor(version=version) + self._rc + '1'
+        new_version = self.bump_minor(version=version)
+        return self.bump_pre(version=new_version)
 
     def bump_prepatch(self, version: Union[Version, str]) -> str:
-        return self.bump_patch(version=version) + self._rc + '1'
+        new_version = self.bump_patch(version=version)
+        return self.bump_pre(version=new_version)
 
     def bump_release(self, version: Union[Version, str]) -> str:
         parts = self._get_parts(version)
