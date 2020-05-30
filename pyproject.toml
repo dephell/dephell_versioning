@@ -1,6 +1,7 @@
 [tool.dephell.main]
 from = {format = "poetry", path = "pyproject.toml"}
 to = {format = "setuppy", path = "setup.py"}
+tag = "v."
 
 [tool.dephell.flake8]
 from = {format = "pip", path = "requirements-flake.txt"}
@@ -35,7 +36,7 @@ import_heading_localfolder = "app"
 name = "dephell_versioning"
 version = "0.1.1"
 description = "Library for bumping project version like a pro"
-authors = ["Gram <mail@orsinium.dev>"]
+authors = ["Gram <gram@orsinium.dev>"]
 readme = "README.md"
 license = "MIT"
 repository = "https://github.com/dephell/dephell_versioning"
