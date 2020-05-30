@@ -34,7 +34,7 @@ import_heading_localfolder = "app"
 
 [tool.poetry]
 name = "dephell_versioning"
-version = "0.1.1"
+version = "0.1.2"
 description = "Library for bumping project version like a pro"
 authors = ["Gram <gram@orsinium.dev>"]
 readme = "README.md"
